@@ -36,5 +36,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    gap: 30px;
+  }
 }

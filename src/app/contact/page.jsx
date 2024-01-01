@@ -15,8 +15,8 @@ function ContactPage() {
           <textarea
             name=""
             id=""
-            cols="30"
-            rows="10"
+            cols="20"
+            rows="8"
             placeholder="Your Message"
           ></textarea>
           <button type="submit" className={styles.btn}>

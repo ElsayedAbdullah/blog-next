@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./navbar.module.css";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
 
 const links = [
   { id: 1, title: "Home", path: "/" },
@@ -14,7 +15,7 @@ const links = [
 
 function Navbar() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   // Temporary
   const session = false;
@@ -26,8 +27,54 @@ function Navbar() {
         <div className={styles.logo}>
           <Link href="/">Syd Dev</Link>
         </div>
+        <ul className={styles.menu}>
+          {links.map((link) => (
+            <li className={styles.menuItem} key={link.id}>
+              <Link
+                className={`${pathname === link.path && styles.active}`}
+                href={link.path}
+              >
+                {link.title}
+              </Link>
+            </li>
+          ))}
+
+          {session ? (
+            isAdmin && (
+              <>
+                <li className={styles.menuItem}>
+                  <Link
+                    className={`${pathname === "/admin" && styles.active}`}
+                    href="/admin"
+                  >
+                    Admin
+                  </Link>
+                </li>
+                <button className={styles.logout}>Logout</button>
+              </>
+            )
+          ) : (
+            <li className={styles.menuItem}>
+              <Link
+                className={`${pathname === "/login" && styles.active}`}
+                href="/login"
+              >
+                Login
+              </Link>
+            </li>
+          )}
+        </ul>
+
+        <Image
+          onClick={() => setOpen(!open)}
+          src="/menu.png"
+          alt="menu"
+          width={20}
+          height={20}
+          className={styles.menuBtn}
+        />
         {open && (
-          <ul className={styles.menu}>
+          <ul className={styles.mobileMenu}>
             {links.map((link) => (
               <li className={styles.menuItem} key={link.id}>
                 <Link
@@ -65,10 +112,6 @@ function Navbar() {
             )}
           </ul>
         )}
-
-        <button className={styles.menuBtn} onClick={() => setOpen(!open)}>
-          Menu
-        </button>
       </div>
     </div>
   );

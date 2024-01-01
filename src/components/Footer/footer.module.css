@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 0;
+  flex-wrap: wrap;
   color: gray;
   height: 100px;
 }
@@ -13,4 +14,13 @@
 
 .text {
   font-size: 14px;
+}
+
+@media screen and (max-width: 767px) {
+  .footer {
+    justify-content: center;
+    text-align: center;
+    gap: 15px;
+    height: auto;
+  }
 }
